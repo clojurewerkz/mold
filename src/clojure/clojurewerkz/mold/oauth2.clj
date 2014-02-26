@@ -5,8 +5,16 @@
 ;; API
 ;;
 
-(defn ^boolean expired?
-  "Returns true if provided token has expired"
-  [^OAuth2AccessToken token]
-  (let [now (java.util.Date.)]
-    (.after now (.getDate token))))
+(defprotocol AccessToken
+  (expired? [arguments] "Returns true if provided token has expired"))
+
+(extend-protocol AccessToken
+  OAuth2AccessToken
+  (expired? [token]
+    (let [now (java.util.Date.)]
+      (.after now (.getExpiration token))))
+
+  clojure.lang.IPersistentMap
+  (expired? [token]
+    (let [now (java.util.Date.)]
+      (.after now (:expiration token)))))
