@@ -1,6 +1,7 @@
 (ns clojurewerkz.mold.conversion
   (:import [org.cloudfoundry.client.lib CloudCredentials
-                                        HttpProxyConfiguration]))
+                                        HttpProxyConfiguration]
+           [org.springframework.security.oauth2.common OAuth2AccessToken]))
 
 
 
@@ -20,3 +21,13 @@
   [{:keys [^String host port]}]
   (when (and host port)
     (HttpProxyConfiguration. host port)))
+
+(defn oauth-access-token->map
+  [^OAuth2AccessToken token]
+  {:scope (set (.getScope token))
+   :type (.getTokenType token)
+   :expired? (.isExpired token)
+   :expiration (.getExpiration token)
+   :expires-in (.getExpiresIn token)
+   :value (.getValue token)
+   :additional-information (into {} (.getAdditionalInformation token))})
