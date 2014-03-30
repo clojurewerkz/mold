@@ -1,6 +1,6 @@
 (defproject clojurewerkz/mold "1.0.0-alpha2-SNAPSHOT"
   :description "Clojure client for various CloudFoundry services (primarily UAA and CC)"
-  :dependencies [[org.clojure/clojure "1.5.1"]
+  :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.cloudfoundry/cloudfoundry-client-lib "1.0.2"]]
   :profiles {:1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
              :1.6 {:dependencies [[org.clojure/clojure "1.6.0"]]}
