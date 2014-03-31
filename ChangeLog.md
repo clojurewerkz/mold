@@ -1,4 +1,9 @@
-# Changes Between 1.0.0-alpha1 and 1.0.0-alpha2
+## Changes Between 1.0.0-alpha2 and 1.0.0-beta1
+
+No changes yet.
+
+
+## Changes Between 1.0.0-alpha1 and 1.0.0-alpha2
 
 ### Clojure 1.6 By Default
 
