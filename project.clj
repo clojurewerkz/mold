@@ -1,12 +1,12 @@
 (defproject clojurewerkz/mold "1.0.0-beta1-SNAPSHOT"
   :description "Clojure client for various CloudFoundry services (primarily UAA and CC)"
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.cloudfoundry/cloudfoundry-client-lib "1.0.2"]]
+                 [org.cloudfoundry/cloudfoundry-client-lib "1.0.3.BUILD-SNAPSHOT"]]
   :profiles {:1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
              :1.5 {:dependencies [[org.clojure/clojure "1.5.1"]]}
              :master {:dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]]}
              :dev {:resource-paths ["test/resources"]
-                   :plugins [[codox "0.8.8"]]
+                   :plugins [[codox "0.8.9"]]
                    :codox {:sources ["src/clojure"]
                            :output-dir "doc/api"}}}
   :aliases {"all" ["with-profile" "dev:dev,1.4:dev,1.5:dev,master"]}
