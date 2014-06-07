@@ -1,7 +1,7 @@
 (defproject clojurewerkz/mold "1.0.0-beta1-SNAPSHOT"
   :description "Clojure client for various CloudFoundry services (primarily UAA and CC)"
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.cloudfoundry/cloudfoundry-client-lib "1.0.3.BUILD-SNAPSHOT"]]
+                 [org.cloudfoundry/cloudfoundry-client-lib "1.0.3"]]
   :profiles {:1.4 {:dependencies [[org.clojure/clojure "1.4.0"]]}
              :1.5 {:dependencies [[org.clojure/clojure "1.5.1"]]}
              :master {:dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]]}
