@@ -1,7 +1,7 @@
 (ns clojurewerkz.mold.client
   (:require [clojurewerkz.mold.conversion :as cnv])
   (:import java.net.URL
-           [org.cloudfoundry.client.lib CloudFoundryClient]))
+           [org.cloudfoundry.client.lib CloudFoundryOperations CloudFoundryClient]))
 
 ;;
 ;; Implementation
@@ -24,7 +24,7 @@
 ;; API
 ;;
 
-(defn ^CloudFoundryClient make-client
+(defn ^CloudFoundryOperations make-client
   ([url]
      (make-client url {}))
   ([url {:keys [credentials
@@ -39,4 +39,4 @@
        (if (and (nil? organization) (nil? space))
          (CloudFoundryClient. credentials' url' proxy-cfg trust-self-signed-certs?)
          (CloudFoundryClient. credentials' url' organization space
-                              proxy-cfg trust-self-signed-certs?)))))
+                        proxy-cfg trust-self-signed-certs?)))))
