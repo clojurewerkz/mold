@@ -1,4 +1,4 @@
-(ns clojurewerkz.mold.conversion
+(ns clojurewerkz.mold.internal.conversion
   (:import [org.cloudfoundry.client.lib CloudCredentials
                                         HttpProxyConfiguration]
            [org.springframework.security.oauth2.common OAuth2AccessToken]
@@ -81,9 +81,8 @@
                :url         (.getUrl cso)
                :info-url    (.getInfoUrl cso)
                :extra       (.getExtra cso)
-               ;; not available in the most recent release. MK.
-               ;; :documentation-url (.getDocumentationUrl cso)
-               :plans       (map service-plan->map (.getCloudServicePlans cso))})))
+               :documentation-url (.getDocumentationUrl cso)
+               :plans       (doall (map service-plan->map (.getCloudServicePlans cso)))})))
 
 (defprotocol UUIDSource
   (uuid-from [arg] "Produces a UUID from input"))

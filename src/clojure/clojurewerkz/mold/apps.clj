@@ -1,5 +1,5 @@
 (ns clojurewerkz.mold.apps
-  (:import [org.cloudfoundry.client.lib CloudFoundryOperations]
+  (:import clojurewerkz.mold.client.CFClient
            java.util.UUID))
 
 ;;
@@ -7,13 +7,13 @@
 ;;
 
 (defn list
-  [^CloudFoundryOperations client]
-  (.getApplications client))
+  [^CFClient client]
+  (.. client impl getApplications))
 
 (defn by-name
-  [^CloudFoundryOperations client ^String name]
-  (.getApplication client name))
+  [^CFClient client ^String name]
+  (-> client .impl (.getApplication name)))
 
 (defn by-uuid
-  [^CloudFoundryOperations client ^UUID id]
-  (.getApplication client id))
+  [^CFClient client ^UUID id]
+  (-> client .impl (.getApplication id)))

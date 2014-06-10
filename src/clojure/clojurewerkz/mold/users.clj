@@ -1,6 +1,6 @@
 (ns clojurewerkz.mold.users
-  (:require [clojurewerkz.mold.conversion :as cnv])
-  (:import [org.cloudfoundry.client.lib CloudFoundryOperations]
+  (:require [clojurewerkz.mold.internal.conversion :as cnv])
+  (:import clojurewerkz.mold.client.CFClient
            [org.springframework.security.oauth2.common OAuth2AccessToken]))
 
 
@@ -9,18 +9,18 @@
 ;;
 
 (defn register
-  [^CloudFoundryOperations client ^String email ^String password]
-  (.register client email password))
+  [^CFClient client ^String email ^String password]
+  (-> client .impl (.register email password)))
 
 (defn ^OAuth2AccessToken raw-login
-  [^CloudFoundryOperations client]
-  (.login client))
+  [^CFClient client]
+  (.. client impl login))
 
 (defn login
-  [^CloudFoundryOperations client]
-  (cnv/oauth-access-token->map (.login client)))
+  [^CFClient client]
+  (cnv/oauth-access-token->map (.. client impl login)))
 
 (defn logout
-  [^CloudFoundryOperations client]
-  (.logout client))
+  [^CFClient client]
+  (.. client impl logout))
 
