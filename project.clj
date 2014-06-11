@@ -1,4 +1,4 @@
-(defproject clojurewerkz/mold "1.0.0-beta2"
+(defproject clojurewerkz/mold "1.0.0-beta3-SNAPSHOT"
   :description "Clojure client for various CloudFoundry services (primarily UAA and CC)"
   :dependencies [[org.clojure/clojure                      "1.6.0"]
                  [org.cloudfoundry/cloudfoundry-client-lib "1.0.3"]
