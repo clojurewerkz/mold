@@ -44,7 +44,7 @@
   [^CFClient client ^String id]
   (:uuid (find-service-by-unique-id client id)))
 
-(defn migrate-service-plans
+(defn migrate-service-instances
   [^CFClient client v1-guid v2-guid]
   (let [{:keys [body]} (mhttp/put client (format "/v2/service_plans/%s/service_instances" v1-guid)
                                  {:body {"service_plan_guid" v2-guid}})]
