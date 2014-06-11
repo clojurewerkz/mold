@@ -1,5 +1,5 @@
 (defproject clojurewerkz/mold "1.0.0-beta3-SNAPSHOT"
-  :description "Clojure client for various CloudFoundry services (primarily UAA and CC)"
+  :description "Clojure library for working with CloudFoundry services (primarily Cloud Controller)"
   :dependencies [[org.clojure/clojure                      "1.6.0"]
                  [org.cloudfoundry/cloudfoundry-client-lib "1.0.3"]
                  ;; HTTP client which uses HTTPCore 4.2.x, compatible
