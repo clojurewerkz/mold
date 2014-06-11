@@ -3,45 +3,58 @@
   (:require clojurewerkz.mold.client
             [clj-http.client :as hc]
             [cheshire.core   :as json])
-  (:import clojurewerkz.mold.client.CFClient))
+  (:import clojurewerkz.mold.client.CFClient
+           org.cloudfoundry.client.lib.oauth2.OauthClient))
 
 (def ^:const authorization-header "Authorization")
+
+;;
+;; Implementation
+;;
+
+(defn- ^String url-for
+  [^CFClient client ^String path]
+  (str (.url client) path))
+
+(defn- ^OauthClient oauth-client-from
+  [^CFClient client]
+  (doto (.oauth-client client)
+    ;; refreshes the token if needed
+    (.getToken)))
+
+(defn- inject-headers
+  [opts oac]
+  (-> opts
+      (assoc-in [:headers authorization-header]
+                (.getAuthorizationHeader oac))
+      (assoc :throw-exceptions true)))
 
 ;;
 ;; API
 ;;
 
-;; TODO: remove structural duplication
-
 (defn get
   [^CFClient client ^String path opts]
-  (let [url   (str (.url client) path)
-        oac   (.oauth-client client)]
-    ;; refreshes the token if needed.
-    (.getToken oac)
-    (hc/get url (-> opts
-                    (assoc-in [:headers authorization-header]
-                              (.getAuthorizationHeader oac))
-                    (assoc :throw-exceptions true)))))
+  (let [url   (url-for client path)
+        oac   (oauth-client-from client)]
+    (hc/get url (inject-headers opts oac))))
 
 (defn post
   [^CFClient client ^String path {:keys [body] :as opts}]
-  (let [url   (str (.url client) path)
-        oac   (.oauth-client client)]
-    (.getToken oac)
-    (hc/post url (-> opts
-                     (assoc-in [:headers authorization-header]
-                               (.getAuthorizationHeader oac))
-                     (assoc :body (json/generate-string body))
-                     (assoc :throw-exceptions true)))))
+  (let [url   (url-for client path)
+        oac   (oauth-client-from client)]
+    (hc/post url (-> (inject-headers opts oac)
+                     (assoc :body (json/generate-string body))))))
 
 (defn put
   [^CFClient client ^String path {:keys [body] :as opts}]
-  (let [url   (str (.url client) path)
-        oac   (.oauth-client client)]
-    (.getToken oac)
-    (hc/put url (-> opts
-                    (assoc-in [:headers authorization-header]
-                              (.getAuthorizationHeader oac))
-                    (assoc :body (json/generate-string body))
-                    (assoc :throw-exceptions true)))))
+  (let [url   (url-for client path)
+        oac   (oauth-client-from client)]
+    (hc/put url (-> (inject-headers opts oac)
+                    (assoc :body (json/generate-string body))))))
+
+(defn delete
+  [^CFClient client ^String path opts]
+  (let [url   (url-for client path)
+        oac   (oauth-client-from client)]
+    (hc/delete url (inject-headers opts oac))))
