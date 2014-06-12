@@ -52,6 +52,12 @@
 
 (defn purge-service-by-guid
   [^CFClient client guid]
-  (let [{:keys [body]} (mhttp/delete client (format "/v2/services/%s" guid)
-                                 {:query-params {"purge" true}})]
-       (json/parse-string body)))
+  (mhttp/delete client (format "/v2/services/%s" guid)
+                {:query-params {"purge" true}}))
+
+(defn maybe-purge-service-by-guid
+  "Like purge-service-by-guid but does not throw exceptions when the service
+   cannot be found"
+  [^CFClient client guid]
+  (mhttp/delete client (format "/v2/services/%s" guid)
+                                 {:throw-exceptions false :query-params {"purge" true}}))
