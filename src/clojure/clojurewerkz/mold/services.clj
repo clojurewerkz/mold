@@ -25,8 +25,9 @@
 
 (defn update-instance
   [^CFClient client ^String guid m]
-  (let [path (format "/v2/service_instances/%s" guid)]
-    (mhttp/put client path {:body m})))
+  (let [path           (format "/v2/service_instances/%s" guid)
+        {:keys [body]} (mhttp/put client path {:body m})]
+    (json/parse-string body)))
 
 (defn find-service-by-unique-id
   [^CFClient client ^String id]
