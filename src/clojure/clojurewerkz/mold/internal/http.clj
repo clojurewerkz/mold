@@ -47,7 +47,7 @@
   ([^CFClient client ^String path opts]
      (let [{:keys [body]} (get client path opts)
            m              (json/parse-string body)
-           xs             (clojure.core/get m "resources")]
+           xs             (clojure.core/get m "resources" [])]
        (if-let [next-url (clojure.core/get m "next_url")]
          (lazy-cat xs (get-resources client next-url opts))
          xs))))
