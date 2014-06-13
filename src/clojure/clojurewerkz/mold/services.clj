@@ -23,6 +23,11 @@
   (let [path "/v2/service_instances?inline-relations-depth=1&return_user_provided_service_instances=true&results-per-page=100"]
     (mhttp/get-resources client path)))
 
+(defn update-instance
+  [^CFClient client ^String guid m]
+  (let [path (format "/v2/service_instances/%s" guid)]
+    (mhttp/put client path {:body m})))
+
 (defn find-service-by-unique-id
   [^CFClient client ^String id]
   (some (fn [m]
