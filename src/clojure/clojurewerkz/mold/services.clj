@@ -20,7 +20,8 @@
 
 (defn list-instances
   [^CFClient client]
-  (map cnv/service->map (.. client impl getServices)))
+  (let [path "/v2/service_instances?inline-relations-depth=1&return_user_provided_service_instances=true&results-per-page=100"]
+    (mhttp/get-resources client path)))
 
 (defn find-service-by-unique-id
   [^CFClient client ^String id]
