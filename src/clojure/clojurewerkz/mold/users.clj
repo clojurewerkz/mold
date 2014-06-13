@@ -1,5 +1,6 @@
 (ns clojurewerkz.mold.users
-  (:require [clojurewerkz.mold.internal.conversion :as cnv])
+  (:require [clojurewerkz.mold.client :as mc]
+            [clojurewerkz.mold.internal.conversion :as cnv])
   (:import clojurewerkz.mold.client.CFClient
            [org.springframework.security.oauth2.common OAuth2AccessToken]))
 
