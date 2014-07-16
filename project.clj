@@ -1,4 +1,4 @@
-(defproject clojurewerkz/mold "1.0.0-beta4"
+(defproject clojurewerkz/mold "1.0.0-beta5-SNAPSHOT"
   :description "Clojure library for working with CloudFoundry services (primarily Cloud Controller)"
   :dependencies [[org.clojure/clojure                      "1.6.0"]
                  [org.cloudfoundry/cloudfoundry-client-lib "1.0.3"]
