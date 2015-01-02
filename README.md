@@ -12,7 +12,9 @@ Mold is a Clojure client for CloudFoundry built on top of the official
 
 ## Project Maturity
 
-Mold is *very* young and incomplete.
+Mold is has been used in production for months. It does not support
+the entire feature set of the Java client but is sufficient for building
+Cloud Foundry service brokers.
 
 
 ## Artifacts
