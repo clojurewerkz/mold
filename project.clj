@@ -7,7 +7,7 @@
                  [clj-http                                 "0.7.6"]
                  [cheshire                                 "5.3.1"]]
   :profiles {:1.7 {:dependencies [[org.clojure/clojure "1.7.0"]]}
-             :master {:dependencies [[org.clojure/clojure "1.7.0-master-SNAPSHOT"]]}
+             :master {:dependencies [[org.clojure/clojure "1.8.0-master-SNAPSHOT"]]}
              :dev {:resource-paths ["test/resources"]
                    :plugins [[codox "0.8.10"]]
                    :codox {:sources ["src/clojure"]
